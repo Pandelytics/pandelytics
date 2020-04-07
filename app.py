@@ -1,40 +1,24 @@
 import requests
 import bs4
 import json
-import time
-from flask import Flask
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-
-# chrome_options = Options()
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--window-size=1920x1080")
-
-app = Flask(__name__)
-@app.route("/")
+# from flask import Flask
 
 
+# app = Flask(__name__)
+# @app.route("/")
 
-url = 'https://mobile.twitter.com/hashtag/'
 
 def twitterScrapper(hashtag):
+
+    url = 'https://mobile.twitter.com/search?q='
+
     # remove the '#' from the query
     if '#' in hashtag :
         hashtag = hashtag.replace('#', '')
 
-    #get the browser using selenium webdriver
-    browser = webdriver.Chrome('C:/Users/ladankhadija/SLKhadeeja/pandelytics/chromedriver.exe')
-    browser.get(url + hashtag)
     
-    # #scroll the pages 5 times (in this case there are 20 pages per execute).... wait 5 seconds between executing script
-    for i in range(5):
-        browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(5)
-
-    # source = browser.page_source
-
     #transferr the source from selenium to beautiful soup
-    hashtag_search = requests.get(browser.current_url)
+    hashtag_search = requests.get(url + hashtag)
     hashtag_soup = bs4.BeautifulSoup(hashtag_search.text, features="lxml")
 
     usernames = hashtag_soup.select('div.username')
@@ -58,7 +42,7 @@ def twitterScrapper(hashtag):
     #convert the list to json
     data_json = json.dumps(data)
 
-    return (data_json)
+    return (print(data_json))
 
 twitterScrapper('#covid19')
 
