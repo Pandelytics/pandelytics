@@ -42,7 +42,7 @@ def twitterScrapper(hashtag):
     #convert the list to json
     data_json = json.dumps(data)
 
-    return ((data_json)
+    return (data_json)
 
 twitterScrapper('#covid19')
 
