@@ -57,7 +57,7 @@ class Base:
         }
         return headers
 
-    def request(self, url):
+    def request(self, url, **kwargs):
         """
         Returns the source code of a webpage.
 
@@ -75,8 +75,8 @@ class Base:
     def response(self, **kwargs):
         """ Get results from soup"""
 
-        html = self.request(self.parsed_url.geturl())
+        html = self.request(self.parsed_url.geturl(), **kwargs)
         soup = BeautifulSoup(html, 'lxml')
 
-        results = self.parse_soup(soup, **kwargs)
+        results = self.parse_soup(soup)
         return results

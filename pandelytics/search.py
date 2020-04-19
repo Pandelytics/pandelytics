@@ -1,7 +1,7 @@
 from importlib import import_module
 
 
-def search(engine, type_="News"):
+def search(engine, type_="News", **kwargs):
     """ Returns results """
 
     module = f"pandelytics.engines.{engine.lower()}"
@@ -20,4 +20,4 @@ def search(engine, type_="News"):
         return
 
     engine = engine_class()
-    return engine.response()
+    return engine.response(**kwargs)
