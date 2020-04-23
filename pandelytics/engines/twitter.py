@@ -17,19 +17,22 @@ class News(Base):
         return params
 
     def parse_soup(self, soup):
-        usernames = soup.select('div.username')
-        tweet_links = soup.find_all("td", class_="timestamp")
-        tweet_texts = soup.select('div.dir-ltr')
+        tweets = soup.select('table.tweet')
 
         data = []
 
-        print(usernames, tweet_links, tweet_texts)
-        for i in range(len(usernames)):
+        for tweet in tweets:
+            username = tweet.find('div', class_ ='username')
+            tweet_link = tweet.find('td', class_='timestamp')
+            tweet_text = tweet.find('div', class_='dir-ltr')
+
+            # print(username, tweet_link, tweet_text)
+
             rdict = {}
-            rdict['username'] = usernames[i].getText().replace(
+            rdict['username'] = username.getText().replace(
                 '\n', '').replace(' ', '')
-            rdict['link_to_tweet'] = self.url + tweet_links[i].a["href"]
-            rdict['tweet-text'] = tweet_texts[i].getText().replace('\n', '')
+            rdict['link_to_tweet'] = self.url + tweet_link.a["href"]
+            rdict['tweet-text'] = tweet_text.getText().replace('\n', '')
 
             data.append(rdict)
 
