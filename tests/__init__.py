@@ -1,0 +1,2 @@
+from pandelytics import __version__
+import pandelytics.search
