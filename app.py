@@ -1,8 +1,12 @@
 import json
 
 from pandelytics import search
+from fastapi import FastAPI
 
-if __name__ == "__main__":
+app = FastAPI()
+
+
+@app.get("/")
+async def root():
     news = search.search("jhu", "Data")
-    if news:
-        print(json.dumps(news, indent=4))
+    return news
