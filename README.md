@@ -24,15 +24,6 @@ Clone the repository
     git clone https://github.com/Pandelytics/pandelytics.git
 ```
 
-Create virtual environment and install requirements
-
-```bash
-    pip install -r requirements.txt
-```
-
-Install all requirements
-
-```bash
-  pip install -r requirements.txt
-```
+This project makes use of poetry for dependency management. Poetry helps us pin down a specific python version and other requirements
+To install Poetry and learn more about how to install, remove and manage packages using poetry visit the [documentation](https://python-poetry.org/docs/)
 
